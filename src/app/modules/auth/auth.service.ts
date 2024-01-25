@@ -8,6 +8,13 @@ import config from '../../config';
 
 // register user
 const registerUser = async (payload: TUser) => {
+    
+  // check if the user exists
+  const isUserExists = await User.findOne({ email: payload.email });
+  if (isUserExists) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'user already exists');
+  }
+
   const result = await User.create(payload);
   return result;
 };
@@ -41,7 +48,6 @@ const loginUser = async (payload: TUser) => {
   });
 
   return {
-    user,
     accessToken,
   };
 };
