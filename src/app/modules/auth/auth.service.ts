@@ -12,9 +12,6 @@ const registerUser = async (payload: TUser) => {
   return result;
 };
 
-
-
-
 // login user
 const loginUser = async (payload: TUser) => {
   // check if the user exists
@@ -32,9 +29,21 @@ const loginUser = async (payload: TUser) => {
     throw new AppError(httpStatus.BAD_REQUEST, 'incorrect password');
   }
 
+  //   create jwt token and send to client
+  const jwtPayload = {
+    id: user._id,
+    email: user.email,
+  };
 
+  //   create access token
+  const accessToken = jwt.sign(jwtPayload, config.jwt_access_secret as string, {
+    expiresIn: '1d',
+  });
 
-
+  return {
+    user,
+    accessToken,
+  };
 };
 
 export const AuthServices = {
