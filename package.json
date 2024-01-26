@@ -1,10 +1,10 @@
 {
-  "name": "assignment-2",
+  "name": "assignment-5",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "startDev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "lint": "eslint src --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npx eslint src --fix",
