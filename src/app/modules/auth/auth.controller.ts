@@ -7,7 +7,7 @@ const registerUser = catchAsync(async (req, res) => {
   const result = await AuthServices.registerUser(user);
 
   res.status(200).json({
-    status: 'success',
+    success: true,
     message: 'user registered successfully',
     data: result,
   });
@@ -19,13 +19,13 @@ const loginUser = catchAsync(async (req, res) => {
   const result = await AuthServices.loginUser(loginInfo);
 
   res.status(200).json({
-    status: 'success',
+    success: true,
     message: 'user logged in successfully',
-    accessToken : result.accessToken,
+    accessToken: result.accessToken,
   });
 });
 
 export const AuthControllers = {
   registerUser,
-  loginUser
+  loginUser,
 };
