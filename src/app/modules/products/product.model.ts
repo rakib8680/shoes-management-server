@@ -24,6 +24,9 @@ const productSchema = new Schema<TProduct>(
     style: {
       type: String,
     },
+    photoUrl: {
+      type: String,
+    },
   },
   {
     timestamps: true,
