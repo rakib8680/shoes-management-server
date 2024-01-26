@@ -1,6 +1,8 @@
 import catchAsync from '../../utils/catchAsync';
 import { productServices } from './product.service';
 
+
+
 // add shoes to DB
 const addShoes = catchAsync(async (req, res) => {
   const shoes = req.body;
@@ -13,6 +15,8 @@ const addShoes = catchAsync(async (req, res) => {
   });
 });
 
+
+
 // get all shoes from DB
 const getAllShoes = catchAsync(async (req, res) => {
   const result = await productServices.getAllShoes();
@@ -24,7 +28,22 @@ const getAllShoes = catchAsync(async (req, res) => {
   });
 });
 
+
+
+// delete singe shoe
+const deleteSingleShoe = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const result = await productServices.deleteSingleShoe(id);
+
+  res.status(200).json({
+    success: true,
+    message: 'Shoe deleted successfully',
+    data: result,
+  });
+});
+
 export const productControllers = {
   addShoes,
   getAllShoes,
+  deleteSingleShoe,
 };

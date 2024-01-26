@@ -7,5 +7,6 @@ export type TProduct = {
     brand: string;
     model: string;
     style: string;
+    size: number[];
     photoUrl: string;
 }

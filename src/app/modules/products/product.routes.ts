@@ -7,6 +7,7 @@ const router = Router();
 
 router.get('/all-shoes', productControllers.getAllShoes)
 router.post('/add-shoes', productControllers.addShoes);
+router.delete('/delete-shoe/:id', productControllers.deleteSingleShoe)
 
 
 
