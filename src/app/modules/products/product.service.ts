@@ -1,5 +1,8 @@
+import httpStatus from 'http-status';
+import AppError from '../../errors/appError';
 import { TProduct } from './product.interface';
 import { Product } from './product.model';
+import { TSalesHistory } from '../history/history.interface';
 
 // get all shoes from database
 const getAllShoes = async () => {
@@ -29,9 +32,14 @@ const updateShoe = async (payload: Partial<TProduct>, id: string) => {
   return result;
 };
 
+
+// sell shoes 
+
+
 export const productServices = {
   addShoes,
   getAllShoes,
   deleteSingleShoe,
   updateShoe,
+  sellShoes
 };
