@@ -49,9 +49,25 @@ const updateShoe = catchAsync(async (req, res) => {
   });
 });
 
+
+// sell shoes
+const sellShoes = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const sellingData = req.body;
+  const result = await productServices.sellShoes(id,sellingData);
+
+
+  res.status(200).json({
+    success: true,
+    message: 'Shoe sold successfully',
+    data: result,
+  })
+})
+
 export const productControllers = {
   addShoes,
   getAllShoes,
   deleteSingleShoe,
   updateShoe,
+  sellShoes
 };
