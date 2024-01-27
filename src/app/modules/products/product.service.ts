@@ -119,12 +119,6 @@ const sellShoes = async (
   // update the quantity
   product.quantity -= quantity;
 
-  // delete product if quantity is 0
-  if (product?.quantity === 0) {
-    await Product.findByIdAndDelete(id);
-    return;
-  }
-
   // update the product
   const updatedProduct = await Product.findByIdAndUpdate(id, product, {
     new: true,
@@ -142,6 +136,12 @@ const sellShoes = async (
   // save selling history into db
   if (updatedProduct) {
     await SalesHistory.create(sellingInfo);
+  }
+
+  // delete product if quantity is 0
+  if (product?.quantity === 0) {
+    await Product.findByIdAndDelete(id);
+    return;
   }
 
   return updatedProduct;
