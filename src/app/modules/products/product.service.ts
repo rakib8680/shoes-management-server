@@ -5,11 +5,27 @@ import { Product } from './product.model';
 import { TSalesHistory } from '../history/history.interface';
 import { SalesHistory } from '../history/history.model';
 
-// get all shoes from database
-const getAllShoes = async (query) => {
-  const { minPrice, maxPrice } = query;
+type TQuery = {
+  minPrice?: number;
+  maxPrice?: number;
+  sort?: string;
+  brand?: string;
+};
 
-  let filter = {};
+type TFilter = {
+  price?: {
+    $gte?: number;
+    $lte?: number;
+  };
+  brand?: string;
+};
+
+// get all shoes from database
+const getAllShoes = async (query: TQuery) => {
+  const { minPrice, maxPrice, sort, brand } = query;
+
+  // filter by price
+  let filter: TFilter = {};
   if (minPrice || maxPrice) {
     filter = {
       price: {
@@ -19,16 +35,20 @@ const getAllShoes = async (query) => {
     };
   }
 
+  if (brand) {
+    filter.brand = brand;
+  }
 
-  const result = await Product.find(filter);
+  let queryBuilder = Product.find(filter);
+  if (sort) {
+    const sortOption = sort === 'latest' ? '-createdAt' : 'createdAt';
+    queryBuilder = queryBuilder.sort(sortOption);
+  }
+
+  const result = await await queryBuilder;
 
   return result;
-
 };
-
-
-
-
 
 // insert shoe data into database
 const addShoes = async (payload: TProduct) => {
@@ -36,13 +56,11 @@ const addShoes = async (payload: TProduct) => {
   return result;
 };
 
-
 // delete shoes from database
 const deleteSingleShoe = async (id: string) => {
   const result = await Product.findByIdAndDelete(id);
   return result;
 };
-
 
 // update shoe
 const updateShoe = async (payload: Partial<TProduct>, id: string) => {
@@ -53,7 +71,6 @@ const updateShoe = async (payload: Partial<TProduct>, id: string) => {
 
   return result;
 };
-
 
 // sell shoes
 const sellShoes = async (
