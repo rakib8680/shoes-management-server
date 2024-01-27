@@ -8,7 +8,6 @@ import config from '../../config';
 
 // register user
 const registerUser = async (payload: TUser) => {
-    
   // check if the user exists
   const isUserExists = await User.findOne({ email: payload.email });
   if (isUserExists) {
@@ -16,7 +15,9 @@ const registerUser = async (payload: TUser) => {
   }
 
   const result = await User.create(payload);
-  return result;
+  const user = result.toJSON() as Partial<TUser>;
+  delete user.password;
+  return user;
 };
 
 // login user
