@@ -5,13 +5,28 @@ import { Product } from './product.model';
 import { TSalesHistory } from '../history/history.interface';
 import { SalesHistory } from '../history/history.model';
 
-
-
 // get all shoes from database
-const getAllShoes = async () => {
-  const result = await Product.find();
+const getAllShoes = async (query) => {
+  const { minPrice, maxPrice } = query;
+
+  let filter = {};
+  if (minPrice || maxPrice) {
+    filter = {
+      price: {
+        ...(minPrice && { $gte: minPrice }),
+        ...(maxPrice && { $lte: maxPrice }),
+      },
+    };
+  }
+
+
+  const result = await Product.find(filter);
+
   return result;
+
 };
+
+
 
 
 
@@ -22,13 +37,11 @@ const addShoes = async (payload: TProduct) => {
 };
 
 
-
 // delete shoes from database
 const deleteSingleShoe = async (id: string) => {
   const result = await Product.findByIdAndDelete(id);
   return result;
 };
-
 
 
 // update shoe
@@ -40,7 +53,6 @@ const updateShoe = async (payload: Partial<TProduct>, id: string) => {
 
   return result;
 };
-
 
 
 // sell shoes
@@ -91,8 +103,6 @@ const sellShoes = async (
 
   return updatedProduct;
 };
-
-
 
 export const productServices = {
   addShoes,

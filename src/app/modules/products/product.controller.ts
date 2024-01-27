@@ -15,7 +15,10 @@ const addShoes = catchAsync(async (req, res) => {
 
 // get all shoes from DB
 const getAllShoes = catchAsync(async (req, res) => {
-  const result = await productServices.getAllShoes();
+
+  const query = req.query;
+
+  const result = await productServices.getAllShoes(query);
 
   res.status(200).json({
     success: true,
