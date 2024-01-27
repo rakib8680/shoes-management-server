@@ -13,6 +13,7 @@ type TQuery = {
   model?: string;
   style?: string;
   color?: string;
+  size?: number[];
 };
 
 type TFilter = {
@@ -24,11 +25,12 @@ type TFilter = {
   model?: string;
   style?: string;
   color?: string;
+  size?: { $in: number[] };
 };
 
 // get all shoes from database
 const getAllShoes = async (query: TQuery) => {
-  const { minPrice, maxPrice, sort, brand, model, style, color } = query;
+  const { minPrice, maxPrice, sort, brand, model, style, color, size } = query;
 
   let filter: TFilter = {};
 
@@ -42,7 +44,7 @@ const getAllShoes = async (query: TQuery) => {
     };
   }
 
-  // filter by brand,model,style,color
+  // filter by brand,model,style,color,size
   if (brand) {
     filter.brand = brand;
   }
@@ -55,7 +57,9 @@ const getAllShoes = async (query: TQuery) => {
   if (color) {
     filter.color = color;
   }
-
+  if (size) {
+    filter.size = { $in: size };
+  }
 
   let queryBuilder = Product.find(filter);
   if (sort) {
