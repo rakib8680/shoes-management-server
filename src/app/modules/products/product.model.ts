@@ -27,6 +27,9 @@ const productSchema = new Schema<TProduct>(
     size: {
       type: [Number],
     },
+    color: {
+      type: String,
+    },
     photoUrl: {
       type: String,
     },

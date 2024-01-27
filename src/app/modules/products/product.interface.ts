@@ -8,5 +8,6 @@ export type TProduct = {
     model: string;
     style: string;
     size: number[];
+    color: string;
     photoUrl: string;
 }

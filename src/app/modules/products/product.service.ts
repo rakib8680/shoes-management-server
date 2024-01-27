@@ -10,6 +10,9 @@ type TQuery = {
   maxPrice?: number;
   sort?: string;
   brand?: string;
+  model?: string;
+  style?: string;
+  color?: string;
 };
 
 type TFilter = {
@@ -18,14 +21,18 @@ type TFilter = {
     $lte?: number;
   };
   brand?: string;
+  model?: string;
+  style?: string;
+  color?: string;
 };
 
 // get all shoes from database
 const getAllShoes = async (query: TQuery) => {
-  const { minPrice, maxPrice, sort, brand } = query;
+  const { minPrice, maxPrice, sort, brand, model, style, color } = query;
+
+  let filter: TFilter = {};
 
   // filter by price
-  let filter: TFilter = {};
   if (minPrice || maxPrice) {
     filter = {
       price: {
@@ -35,9 +42,20 @@ const getAllShoes = async (query: TQuery) => {
     };
   }
 
+  // filter by brand,model,style,color
   if (brand) {
     filter.brand = brand;
   }
+  if (model) {
+    filter.model = model;
+  }
+  if (style) {
+    filter.style = style;
+  }
+  if (color) {
+    filter.color = color;
+  }
+
 
   let queryBuilder = Product.find(filter);
   if (sort) {
@@ -45,7 +63,11 @@ const getAllShoes = async (query: TQuery) => {
     queryBuilder = queryBuilder.sort(sortOption);
   }
 
-  const result = await await queryBuilder;
+  const result = await queryBuilder;
+
+  if (!result.length) {
+    throw new AppError(httpStatus.NOT_FOUND, 'No shoes found');
+  }
 
   return result;
 };
