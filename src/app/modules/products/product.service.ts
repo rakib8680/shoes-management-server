@@ -77,10 +77,10 @@ const getAllShoes = async (query: TQuery) => {
 };
 
 // get single shoe from database
-const getSingleShoe = async (id:string)=>{
+const getSingleShoe = async (id: string) => {
   const result = await Product.findById(id);
   return result;
-}
+};
 
 // insert shoe data into database
 const addShoes = async (payload: TProduct) => {
@@ -159,5 +159,5 @@ export const productServices = {
   deleteSingleShoe,
   updateShoe,
   sellShoes,
-  getSingleShoe
+  getSingleShoe,
 };

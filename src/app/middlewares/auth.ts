@@ -13,11 +13,9 @@ const auth = () => {
     }
 
     // check if the token is valid
-    const decoded = jwt.verify(
-      token,
-      config.jwt_access_secret as string,
-    ) as JwtPayload;
-    if (!decoded) {
+    try {
+      jwt.verify(token, config.jwt_access_secret as string) as JwtPayload;
+    } catch (err) {
       throw new AppError(httpStatus.UNAUTHORIZED, 'you are not authorized');
     }
 
