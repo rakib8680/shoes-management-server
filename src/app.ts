@@ -7,7 +7,7 @@ import notFound from './app/middlewares/notFound';
 
 // middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin: '*', }));
 
 // application route
 app.use('/api', router);
