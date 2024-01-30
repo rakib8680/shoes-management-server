@@ -63,7 +63,7 @@ const getAllShoes = async (query: TQuery) => {
 
   let queryBuilder = Product.find(filter);
   if (sort) {
-    const sortOption = sort === 'latest' ? '-createdAt' : 'createdAt';
+    const sortOption = sort === 'Latest' ? '-createdAt' : 'createdAt';
     queryBuilder = queryBuilder.sort(sortOption);
   }
 
