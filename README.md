@@ -9,7 +9,7 @@ First Clone My Project Repository by running the following command in your termi
 Then Go to the project directory and open the project in your favorite code editor
 
 ```bash
-  cd shoe-management-client
+  cd shoe-management-server
 ```
 
 Then Install all the necessary dependencies by running the following command
