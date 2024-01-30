@@ -1,8 +1,6 @@
-
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { TErrorResponse } from "../types/TErrorResponse";
+import { TErrorResponse } from '../types/TErrorResponse';
 
 export const handleDuplicateKeyError = (err: any): TErrorResponse => {
   const regex = /"([^"]*)"/;

@@ -1,10 +1,8 @@
-import { Router } from "express";
-import { historyControllers } from "./history.controller";
-
+import { Router } from 'express';
+import { historyControllers } from './history.controller';
 
 const router = Router();
 
-router.get('/',historyControllers.getSalesHistory)
+router.get('/', historyControllers.getSalesHistory);
 
-
-export  const HistoryRoutes = router;
+export const HistoryRoutes = router;

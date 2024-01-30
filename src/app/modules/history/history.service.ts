@@ -1,15 +1,12 @@
-import { SalesHistory } from "./history.model"
+import { SalesHistory } from './history.model';
 
+// get all sales history
+const getSalesHistory = async () => {
+  const result = await SalesHistory.find();
 
-
-// get all sales history 
-const getSalesHistory = async()=>{
-    const result = await SalesHistory.find()
-
-    return result
-}
-
+  return result;
+};
 
 export const historyServices = {
-    getSalesHistory
-}
+  getSalesHistory,
+};

@@ -9,7 +9,12 @@ import { ZodError } from 'zod';
 import { handleCastError } from '../errors/handleCastError';
 import { handleDuplicateKeyError } from '../errors/handleDuplicateKeyError';
 
-export const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+export const globalErrorHandler: ErrorRequestHandler = (
+  err,
+  req,
+  res,
+  next,
+) => {
   let errorResponse: TErrorResponse = {
     success: false,
     message: 'Error',
