@@ -1,3 +1,14 @@
+# Shoe Management Server
+
+## Project Live Link: https://shoes-management-server-two.vercel.app
+
+## Project Description
+
+- This is a Shoe Management System where you can add, update, delete, sell shoes and also can see all the shoes and sales history.
+- This is the client side of the project. You can find the client side of the project here: https://shoes-management.vercel.app
+
+
+
 ## How to Run Locally
 
 First Clone My Project Repository by running the following command in your terminal
