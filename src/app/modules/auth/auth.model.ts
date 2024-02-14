@@ -3,11 +3,16 @@ import { Schema, model } from 'mongoose';
 import { TUser } from './auth.interface';
 import bcrypt from 'bcrypt';
 import config from '../../config';
+import { USER_ROLE } from './auth.constant';
 
 const userSchema = new Schema<TUser>({
   name: {
     type: String,
     trim: true,
+  },
+  role: {
+    type: String,
+    default: USER_ROLE.buyer,
   },
   email: {
     type: String,
