@@ -21,7 +21,7 @@ const auth = (...roles: TUserRole[]) => {
         config.jwt_access_secret as string,
       ) as JwtPayload;
     } catch (err) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized');
+      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized');
     }
 
     const { role } = decoded;
@@ -30,7 +30,7 @@ const auth = (...roles: TUserRole[]) => {
     if (roles && !roles.includes(role)) {
       throw new AppError(
         httpStatus.FORBIDDEN,
-        'you are not allowed to access this ',
+        'You are not authorized',
       );
     }
 
