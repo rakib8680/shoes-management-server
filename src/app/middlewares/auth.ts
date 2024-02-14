@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
-import jwt, { JwtPayload, decode } from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../config';
 import { TUserRole } from '../modules/auth/auth.interface';
 
@@ -24,14 +24,20 @@ const auth = (...roles: TUserRole[]) => {
       throw new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized');
     }
 
-    const { _id, email, role } = decoded;
+    const { role } = decoded;
 
+    // check if the role is valid
     if (roles && !roles.includes(role)) {
       throw new AppError(
         httpStatus.FORBIDDEN,
         'you are not allowed to access this ',
       );
     }
+
+    // set user info in req object
+    req.user = decoded;
+
+    // console.log(req.user);
 
     next();
   });
