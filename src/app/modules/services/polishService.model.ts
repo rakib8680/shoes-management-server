@@ -7,8 +7,12 @@ const PolishServiceSchema = new Schema<TPolishService>(
       type: String,
       required: [true, 'Product name is required'],
     },
-    id: {
+    serviceId: {
       type: String,
+    },
+    status: {
+      type: String,
+      default: 'pending',
     },
     type: {
       type: String,
@@ -19,6 +23,9 @@ const PolishServiceSchema = new Schema<TPolishService>(
       required: [true, 'Polishing level is required'],
     },
     instructions: {
+      type: String,
+    },
+    customerEmail: {
       type: String,
     },
   },

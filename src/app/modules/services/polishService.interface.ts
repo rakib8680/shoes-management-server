@@ -2,7 +2,9 @@
 
 export type TPolishService = {
     productName: string;
-    id?: string;
+    serviceId?: string;
+    customerEmail?: string;
+    status?: string;
     type: string;
     level:string;
     instructions?: string;

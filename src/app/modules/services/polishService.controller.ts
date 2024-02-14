@@ -3,12 +3,13 @@ import { polishServices } from './polishService.service';
 
 const addPolishServiceToDB = catchAsync(async (req, res) => {
   const payload = req.body;
+  const user = req.user;
 
-  const result = await polishServices.addPolishServiceToDB(payload);
+  const result = await polishServices.addPolishServiceToDB(payload, user);
 
   res.status(200).json({
     success: true,
-    message: 'Polish Service submitted successfully',
+    message: 'Polish Request submitted successfully',
     data: result,
   });
 });
