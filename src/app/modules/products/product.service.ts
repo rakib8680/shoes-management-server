@@ -4,6 +4,7 @@ import { TProduct } from './product.interface';
 import { Product } from './product.model';
 import { TSalesHistory } from '../history/history.interface';
 import { SalesHistory } from '../history/history.model';
+import { generateRandomId } from '../../utils/generateRandomId';
 
 type TQuery = {
   minPrice?: number;
@@ -69,7 +70,7 @@ const getAllShoes = async (query: TQuery) => {
 
   const result = await queryBuilder;
 
-  if (!result.length) {
+  if (result.length === 0) {
     throw new AppError(httpStatus.NOT_FOUND, 'No shoes found');
   }
 
@@ -84,7 +85,13 @@ const getSingleShoe = async (id: string) => {
 
 // insert shoe data into database
 const addShoes = async (payload: TProduct) => {
-  const result = await Product.create(payload);
+  const uniqueId = generateRandomId();
+  const shoeData = {
+    ...payload,
+    uniqueId,
+  };
+
+  const result = await Product.create(shoeData);
   return result;
 };
 

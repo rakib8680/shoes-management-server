@@ -15,6 +15,13 @@ const productSchema = new Schema<TProduct>(
       type: Number,
       required: [true, 'Product quantity is required'],
     },
+    uniqueId:{
+      type: String,
+    },
+    authentic: {
+      type: Boolean,
+      default: false,
+    },
     brand: {
       type: String,
     },
