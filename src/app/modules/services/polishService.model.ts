@@ -12,6 +12,7 @@ const PolishServiceSchema = new Schema<TPolishService>(
     },
     status: {
       type: String,
+      enum: ['pending', 'ongoing', 'completed'],
       default: 'pending',
     },
     type: {

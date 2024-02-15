@@ -21,14 +21,26 @@ const addPolishServiceToDB = async (
   return result;
 };
 
-
 // get all polish services from db
-const getAllPolishServicesFromDB = async()=>{
+const getAllPolishServicesFromDB = async () => {
   const result = await polishService.find();
   return result;
-}
+};
+
+// update polish services
+const updatePolishService = async (
+  productId: string,
+  payload: Partial<TPolishService>,
+) => {
+  const result = await polishService.findByIdAndUpdate(productId, payload, {
+    new: true,
+  });
+
+  return result;
+};
 
 export const polishServices = {
   addPolishServiceToDB,
-  getAllPolishServicesFromDB
+  getAllPolishServicesFromDB,
+  updatePolishService,
 };

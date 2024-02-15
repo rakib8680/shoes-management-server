@@ -11,7 +11,15 @@ router.post(
   polishServiceController.addPolishServiceToDB,
 );
 
+router.get(
+  '/polish-services',
+  auth(USER_ROLE.seller),
+  polishServiceController.getAllPolishServicesFromDB,
+);
 
-router.get('/polish-services', auth(USER_ROLE.seller), polishServiceController.getAllPolishServicesFromDB)
+router.patch(
+  '/update-polish/:productId',
+  polishServiceController.updatePolishService,
+);
 
 export const PolishServiceRoutes = router;

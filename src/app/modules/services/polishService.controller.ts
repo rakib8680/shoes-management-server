@@ -1,7 +1,6 @@
 import catchAsync from '../../utils/catchAsync';
 import { polishServices } from './polishService.service';
 
-
 // add polish service to db
 const addPolishServiceToDB = catchAsync(async (req, res) => {
   const payload = req.body;
@@ -16,18 +15,31 @@ const addPolishServiceToDB = catchAsync(async (req, res) => {
   });
 });
 
-
-
 // get all polish services from db
-const getAllPolishServicesFromDB = catchAsync(async(req,res)=>{
-  const result = await polishServices.getAllPolishServicesFromDBgetAllPolishServicesFromDB();
+const getAllPolishServicesFromDB = catchAsync(async (req, res) => {
+  const result = await polishServices.getAllPolishServicesFromDB();
   res.status(200).json({
     success: true,
+    message: 'Polish Services fetched successfully',
     data: result,
   });
-})
+});
+
+// update polish services
+const updatePolishService = catchAsync(async (req, res) => {
+  const productId = req.params.productId;
+  const payload = req.body;
+  const result = await polishServices.updatePolishService(productId, payload);
+
+  res.status(200).json({
+    success: true,
+    message: 'Polish Service updated successfully',
+    data: result,
+  });
+});
 
 export const polishServiceController = {
   addPolishServiceToDB,
-  getAllPolishServicesFromDB
+  getAllPolishServicesFromDB,
+  updatePolishService,
 };
