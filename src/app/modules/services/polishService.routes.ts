@@ -12,4 +12,6 @@ router.post(
 );
 
 
+router.get('/polish-services', auth(USER_ROLE.seller), polishServiceController.getAllPolishServicesFromDB)
+
 export const PolishServiceRoutes = router;
