@@ -63,6 +63,19 @@ const updateShoe = catchAsync(async (req, res) => {
   });
 });
 
+// verify authentic shoe
+const verifyAuthenticShoe = catchAsync(async (req, res) => {
+  const uniqueId = req.params.uniqueId;
+
+  const result = await productServices.verifyAuthenticShoe(uniqueId);
+
+  res.status(200).json({
+    success: true,
+    message: 'Your product is authentic',
+    data: result,
+  });
+});
+
 // sell shoes
 const sellShoes = catchAsync(async (req, res) => {
   const id = req.params.id;
@@ -83,4 +96,5 @@ export const productControllers = {
   updateShoe,
   sellShoes,
   getSingleShoe,
+  verifyAuthenticShoe,
 };

@@ -18,7 +18,7 @@ const productSchema = new Schema<TProduct>(
     uniqueId:{
       type: String,
     },
-    authentic: {
+    isAuthentic: {
       type: Boolean,
       default: false,
     },

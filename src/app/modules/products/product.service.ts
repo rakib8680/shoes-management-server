@@ -160,6 +160,21 @@ const sellShoes = async (
   return updatedProduct;
 };
 
+// verify authentic shoe
+const verifyAuthenticShoe = async (uniqueId: string) => {
+  const shoe = await Product.findOne({ uniqueId });
+  if (!shoe) {
+    throw new AppError(httpStatus.NOT_FOUND, 'No Product with this Unique Id');
+  }
+  
+  if(!shoe.isAuthentic){
+    throw new AppError(httpStatus.BAD_REQUEST, 'Your product is not authentic');
+  }
+
+  return shoe;
+
+};
+
 export const productServices = {
   addShoes,
   getAllShoes,
@@ -167,4 +182,5 @@ export const productServices = {
   updateShoe,
   sellShoes,
   getSingleShoe,
+  verifyAuthenticShoe,
 };

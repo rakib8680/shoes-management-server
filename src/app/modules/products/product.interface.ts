@@ -3,7 +3,7 @@ export type TProduct = {
   price: number;
   quantity: number;
   uniqueId?: string;
-  authentic?: boolean;
+  isAuthentic?: boolean;
   brand: string;
   model: string;
   style: string;

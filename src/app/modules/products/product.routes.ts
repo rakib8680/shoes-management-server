@@ -10,13 +10,15 @@ router.get(
   productControllers.getAllShoes,
 );
 
-router.post('/add-shoes', auth(USER_ROLE.seller), productControllers.addShoes);
+router.get('/verify-product/:uniqueId', productControllers.verifyAuthenticShoe);
 
 router.get(
   '/:id',
   auth(USER_ROLE.buyer, USER_ROLE.seller),
   productControllers.getSingleShoe,
 );
+
+router.post('/add-shoes', auth(USER_ROLE.seller), productControllers.addShoes);
 
 router.delete(
   '/delete-shoe/:id',
