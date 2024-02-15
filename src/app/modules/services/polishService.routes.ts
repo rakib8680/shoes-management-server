@@ -19,7 +19,14 @@ router.get(
 
 router.patch(
   '/update-polish/:productId',
+  auth(USER_ROLE.seller),
   polishServiceController.updatePolishService,
+);
+
+router.delete(
+  '/delete-service/:productId',
+  auth(USER_ROLE.seller),
+  polishServiceController.deletePolishService,
 );
 
 export const PolishServiceRoutes = router;

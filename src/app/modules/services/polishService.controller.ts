@@ -38,8 +38,20 @@ const updatePolishService = catchAsync(async (req, res) => {
   });
 });
 
+// delete polish service
+const deletePolishService = catchAsync(async (req, res) => {
+  const productId = req.params.productId;
+  await polishServices.deletePolishService(productId);
+
+  res.status(200).json({
+    success: true,
+    message: 'Service deleted successfully',
+  });
+});
+
 export const polishServiceController = {
   addPolishServiceToDB,
   getAllPolishServicesFromDB,
   updatePolishService,
+  deletePolishService,
 };
