@@ -23,11 +23,14 @@ const addPolishServiceToDB = async (
 };
 
 // get all polish services from db
-const getAllPolishServicesFromDB = async () => {
+const getAllPolishServicesFromDB = async (user: JwtPayload) => {
+  console.log(user);
   const result = await polishService.find();
 
-  if (!result || result.length === 0) {
-    throw new AppError(404, 'No services found');
+ 
+
+  if (user.role === 'buyer') {
+    return result.filter((service) => service.customerEmail === user.email);
   }
 
   return result;

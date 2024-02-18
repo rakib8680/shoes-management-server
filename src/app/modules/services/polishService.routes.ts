@@ -13,7 +13,7 @@ router.post(
 
 router.get(
   '/polish-services',
-  auth(USER_ROLE.seller),
+  auth(USER_ROLE.seller, USER_ROLE.buyer),
   polishServiceController.getAllPolishServicesFromDB,
 );
 

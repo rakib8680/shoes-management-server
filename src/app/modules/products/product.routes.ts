@@ -10,7 +10,11 @@ router.get(
   productControllers.getAllShoes,
 );
 
-router.get('/verify-product/:uniqueId', productControllers.verifyAuthenticShoe);
+router.get(
+  '/verify-product/:uniqueId',
+  auth(USER_ROLE.buyer),
+  productControllers.verifyAuthenticShoe,
+);
 
 router.get(
   '/:id',

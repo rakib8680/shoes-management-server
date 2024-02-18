@@ -1,3 +1,4 @@
+import AppError from '../../errors/appError';
 import catchAsync from '../../utils/catchAsync';
 import { polishServices } from './polishService.service';
 
@@ -17,7 +18,11 @@ const addPolishServiceToDB = catchAsync(async (req, res) => {
 
 // get all polish services from db
 const getAllPolishServicesFromDB = catchAsync(async (req, res) => {
-  const result = await polishServices.getAllPolishServicesFromDB();
+  const user = req.user;
+  const result = await polishServices.getAllPolishServicesFromDB(user);
+  if (!result || result.length === 0) {
+    throw new AppError(404, 'No services found');
+  }
   res.status(200).json({
     success: true,
     message: 'Polish Services fetched successfully',
