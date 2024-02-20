@@ -100,6 +100,7 @@ const deleteSingleShoe = async (id: string) => {
   await Product.findByIdAndDelete(id);
   return null;
 };
+
 // Bulk-delete shoes from database
 const deleteMultipleShoes = async (payload: { selectedShoes: string[] }) => {
   const selectedShoes = payload.selectedShoes;
