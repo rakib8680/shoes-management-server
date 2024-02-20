@@ -28,10 +28,7 @@ const auth = (...roles: TUserRole[]) => {
 
     // check if the role is valid
     if (roles && !roles.includes(role)) {
-      throw new AppError(
-        httpStatus.FORBIDDEN,
-        'You are not authorized',
-      );
+      throw new AppError(httpStatus.FORBIDDEN, 'You are not authorized');
     }
 
     // set user info in req object

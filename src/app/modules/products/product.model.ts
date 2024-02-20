@@ -15,7 +15,7 @@ const productSchema = new Schema<TProduct>(
       type: Number,
       required: [true, 'Product quantity is required'],
     },
-    uniqueId:{
+    uniqueId: {
       type: String,
     },
     isAuthentic: {

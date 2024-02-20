@@ -1,4 +1,4 @@
-import { USER_ROLE } from "./auth.constant";
+import { USER_ROLE } from './auth.constant';
 
 export type TUser = {
   name: string;
