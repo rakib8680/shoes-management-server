@@ -49,6 +49,17 @@ const deleteSingleShoe = catchAsync(async (req, res) => {
     data: result,
   });
 });
+// delete Multiple shoes
+const deleteMultipleShoes = catchAsync(async (req, res) => {
+  const payload = req.body;
+  const result = await productServices.deleteMultipleShoes(payload);
+
+  res.status(200).json({
+    success: true,
+    message: 'Shoes deleted successfully',
+    data: result,
+  });
+});
 
 // update shoe
 const updateShoe = catchAsync(async (req, res) => {
@@ -93,6 +104,7 @@ export const productControllers = {
   addShoes,
   getAllShoes,
   deleteSingleShoe,
+  deleteMultipleShoes,
   updateShoe,
   sellShoes,
   getSingleShoe,

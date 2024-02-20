@@ -100,6 +100,12 @@ const deleteSingleShoe = async (id: string) => {
   await Product.findByIdAndDelete(id);
   return null;
 };
+// Bulk-delete shoes from database
+const deleteMultipleShoes = async (payload: { selectedShoes: string[] }) => {
+  const selectedShoes = payload.selectedShoes;
+  await Product.deleteMany({ _id: { $in: selectedShoes } });
+  return null;
+};
 
 // update shoe
 const updateShoe = async (payload: Partial<TProduct>, id: string) => {
@@ -166,19 +172,19 @@ const verifyAuthenticShoe = async (uniqueId: string) => {
   if (!shoe) {
     throw new AppError(httpStatus.NOT_FOUND, 'No Product with this Unique Id');
   }
-  
-  if(!shoe.isAuthentic){
+
+  if (!shoe.isAuthentic) {
     throw new AppError(httpStatus.BAD_REQUEST, 'Your product is not authentic');
   }
 
   return shoe;
-
 };
 
 export const productServices = {
   addShoes,
   getAllShoes,
   deleteSingleShoe,
+  deleteMultipleShoes,
   updateShoe,
   sellShoes,
   getSingleShoe,

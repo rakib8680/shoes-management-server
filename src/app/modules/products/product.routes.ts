@@ -25,6 +25,12 @@ router.get(
 router.post('/add-shoes', auth(USER_ROLE.seller), productControllers.addShoes);
 
 router.delete(
+  '/delete-shoes',
+  auth(USER_ROLE.seller),
+  productControllers.deleteMultipleShoes,
+);
+
+router.delete(
   '/delete-shoe/:id',
   auth(USER_ROLE.seller),
   productControllers.deleteSingleShoe,
