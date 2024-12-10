@@ -4,6 +4,7 @@ import { TProduct } from './product.interface';
 import { Product } from './product.model';
 import { TSalesHistory } from '../history/history.interface';
 import { SalesHistory } from '../history/history.model';
+import { generateRandomId } from '../../utils/generateRandomId';
 
 type TQuery = {
   minPrice?: number;
@@ -69,7 +70,7 @@ const getAllShoes = async (query: TQuery) => {
 
   const result = await queryBuilder;
 
-  if (!result.length) {
+  if (result.length === 0) {
     throw new AppError(httpStatus.NOT_FOUND, 'No shoes found');
   }
 
@@ -84,13 +85,26 @@ const getSingleShoe = async (id: string) => {
 
 // insert shoe data into database
 const addShoes = async (payload: TProduct) => {
-  const result = await Product.create(payload);
+  const uniqueId = generateRandomId();
+  const shoeData = {
+    ...payload,
+    uniqueId,
+  };
+
+  const result = await Product.create(shoeData);
   return result;
 };
 
 // delete shoes from database
 const deleteSingleShoe = async (id: string) => {
   await Product.findByIdAndDelete(id);
+  return null;
+};
+
+// Bulk-delete shoes from database
+const deleteMultipleShoes = async (payload: { selectedShoes: string[] }) => {
+  const selectedShoes = payload.selectedShoes;
+  await Product.deleteMany({ _id: { $in: selectedShoes } });
   return null;
 };
 
@@ -153,11 +167,27 @@ const sellShoes = async (
   return updatedProduct;
 };
 
+// verify authentic shoe
+const verifyAuthenticShoe = async (uniqueId: string) => {
+  const shoe = await Product.findOne({ uniqueId });
+  if (!shoe) {
+    throw new AppError(httpStatus.NOT_FOUND, 'No Product with this Unique Id');
+  }
+
+  if (!shoe.isAuthentic) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Your product is not authentic');
+  }
+
+  return shoe;
+};
+
 export const productServices = {
   addShoes,
   getAllShoes,
   deleteSingleShoe,
+  deleteMultipleShoes,
   updateShoe,
   sellShoes,
   getSingleShoe,
+  verifyAuthenticShoe,
 };

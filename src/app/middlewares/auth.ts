@@ -3,8 +3,9 @@ import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../config';
+import { TUserRole } from '../modules/auth/auth.interface';
 
-const auth = () => {
+const auth = (...roles: TUserRole[]) => {
   return catchAsync(async (req, res, next) => {
     // check if the token exists
     const token = req.headers.authorization;
@@ -12,12 +13,28 @@ const auth = () => {
       throw new AppError(httpStatus.UNAUTHORIZED, 'you are not authorized');
     }
 
-    // check if the token is valid
+    // checking if the given token is valid
+    let decoded;
     try {
-      jwt.verify(token, config.jwt_access_secret as string) as JwtPayload;
+      decoded = jwt.verify(
+        token,
+        config.jwt_access_secret as string,
+      ) as JwtPayload;
     } catch (err) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'you are not authorized');
+      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized');
     }
+
+    const { role } = decoded;
+
+    // check if the role is valid
+    if (roles && !roles.includes(role)) {
+      throw new AppError(httpStatus.FORBIDDEN, 'You are not authorized');
+    }
+
+    // set user info in req object
+    req.user = decoded;
+
+    // console.log(req.user);
 
     next();
   });
