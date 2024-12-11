@@ -215,4 +215,4 @@ GET /api/products/all-shoes
 
 ## 🖋️ Authored by
 
-- [🚀 Rakib](https://www.github.com/rakib8680) - Visionary behind this project. Find more about me on [GitHub](https://www.github.com/rakib8680).hub
+- [🚀 Rakib](https://www.github.com/rakib8680) - Visionary behind this project. Find more about me on [GitHub](https://www.github.com/rakib8680).hub and [Instagram](https://www.instagram.com/rakib_8680_)
