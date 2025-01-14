@@ -16,7 +16,7 @@ The platform caters to two distinct user types:
 - 🏪 **Sellers**: Manage shoe inventory and monitor sales history
 - 🛍️ **Buyers**: Access the full shoe catalog, request shoe polishing services, and customize shoes by selecting their preferred color and size
 
-This repository houses the server-side code of the project. For the client-side code, visit: [Shoe Management Server](https://github.com/rakib8680/shoes-management-client)
+This repository houses the server-side code of the project. For the client-side code, visit: [Shoe Management Client](https://github.com/rakib8680/shoes-management-client)
 
 ## 🚀 Getting Started with Shoe Management Server
 
