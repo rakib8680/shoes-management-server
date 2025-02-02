@@ -17,11 +17,11 @@ app.use(
 
 // application route
 app.use('/api', router);
-
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
+// error handling
 app.use(globalErrorHandler);
 app.use(notFound);
 
